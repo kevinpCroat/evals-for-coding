@@ -1,0 +1,51 @@
+=== TASK ===
+Review Pull Request #142 for the User Management System. Identify all bugs, security vulnerabilities, performance issues, and code quality problems in the submitted code.
+
+=== CONTEXT ===
+- The code to review is in `starter-code/user_manager.py`
+- This is a new user management module that handles authentication, data retrieval, and session management
+- The module uses SQLite for data storage
+- Review the PR description in `starter-code/PR_DIFF.md` for context
+- The code contains a mix of correct implementations and buggy code
+
+=== DELIVERABLES ===
+Provide a comprehensive code review report that includes:
+
+1. For each issue found, provide:
+   - A descriptive title
+   - Severity classification (CRITICAL, HIGH, MEDIUM, or LOW)
+   - Specific line number(s) where the issue occurs
+   - Clear description of what's wrong
+   - Explanation of the potential impact
+   - Actionable suggestion for how to fix it
+
+2. Format each issue as:
+   ```
+   ## Issue [N]: [Brief Title]
+   - **Severity**: [CRITICAL/HIGH/MEDIUM/LOW]
+   - **Location**: Line [number]
+   - **Description**: [What's wrong]
+   - **Impact**: [What could happen]
+   - **Suggestion**: [How to fix it]
+   ```
+
+=== CONSTRAINTS ===
+- You must provide specific line numbers for each issue
+- Classify severity appropriately based on actual impact
+- Do not flag correct code as problematic - there is working code mixed in
+- Focus on issues that would actually matter in production
+- Provide actionable, specific suggestions (not vague advice)
+
+Severity Guidelines:
+- CRITICAL: Security vulnerabilities, data loss, crashes
+- HIGH: Logic errors, resource leaks, race conditions
+- MEDIUM: Performance problems, missing error handling
+- LOW: Minor code quality or style issues
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your review quality.
+Your score will be based on:
+- Bug detection rate (did you find the actual bugs?)
+- False positive rate (did you avoid flagging correct code?)
+- Severity accuracy (did you classify issues correctly?)
+- Feedback quality (are your suggestions actionable?)

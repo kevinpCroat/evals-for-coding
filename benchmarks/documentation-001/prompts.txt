@@ -1,0 +1,56 @@
+=== TASK ===
+Document the undocumented HTTP client library in `starter-code/http_client.py`.
+
+The code is fully functional but has NO documentation - no docstrings, no comments, no examples. Your job is to:
+1. Add comprehensive docstrings to all public classes and methods
+2. Include working code examples in the docstrings
+3. Follow Google-style Python docstring format
+4. Ensure all examples can actually be executed
+
+=== CONTEXT ===
+The file `starter-code/http_client.py` contains an HTTP client library with:
+- `HTTPClient` class - Main class for making HTTP requests
+- `Response` class - Handles HTTP response data
+- `RetryConfig` class - Configures retry behavior
+- `HTTPError` exception - Custom exception for HTTP errors
+
+The library is production-quality code but completely lacks documentation. Users cannot understand how to use it without reading the implementation.
+
+Files:
+- `starter-code/http_client.py` - The undocumented library to document
+
+=== DELIVERABLES ===
+Update `starter-code/http_client.py` with:
+
+1. Class-level docstrings for all public classes
+   - Brief description of the class purpose
+   - List of key attributes
+   - At least one usage example per class
+
+2. Method-level docstrings for all public methods
+   - Brief description of what the method does
+   - Args section documenting all parameters
+   - Returns section describing return value
+   - Raises section for exceptions (if any)
+   - Example section showing typical usage
+
+3. Working code examples
+   - Examples must be valid Python code
+   - Examples should demonstrate realistic use cases
+   - Examples must execute without errors
+
+4. Consistent formatting
+   - Use Google-style docstrings throughout
+   - Maintain consistent structure across all docstrings
+   - Clear, concise language
+
+=== CONSTRAINTS ===
+- Do NOT modify the actual implementation code (only add docstrings)
+- Do NOT change function signatures or class interfaces
+- Do NOT add new functionality - only documentation
+- Code examples in docstrings must be executable Python
+- Docstrings must accurately reflect what the code actually does
+- Follow Google Python Style Guide for docstring format
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.

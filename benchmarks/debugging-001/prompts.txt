@@ -1,0 +1,51 @@
+=== TASK ===
+Identify the root cause of the failing test in the LRU cache implementation.
+
+There is one failing test in `starter-code/test_lru_cache.py`. Your job is to:
+1. Investigate why the test is failing
+2. Identify the ROOT CAUSE of the bug (not just the symptom)
+3. Document your analysis process
+4. Create a minimal reproduction case
+5. Fix the bug
+
+=== CONTEXT ===
+You have been provided with an LRU (Least Recently Used) cache implementation in `starter-code/lru_cache.py`. An LRU cache evicts the least recently used item when it reaches capacity.
+
+The implementation has a subtle bug that causes incorrect behavior in a specific edge case. The bug is NOT a simple syntax error or typo - it requires understanding the logic and execution flow.
+
+Files:
+- `starter-code/lru_cache.py` - The buggy implementation
+- `starter-code/test_lru_cache.py` - Test suite with one failing test
+
+=== DELIVERABLES ===
+Create a file named `ROOT_CAUSE_ANALYSIS.md` in the starter-code directory with:
+
+1. Investigation Process (20% of score)
+   - What you observed from the failing test
+   - Hypotheses you explored
+   - How you narrowed down the issue
+
+2. Root Cause Analysis (60% of score)
+   - The ROOT CAUSE of the bug (be specific)
+   - WHY this causes the observed failure
+   - Which lines of code are problematic and WHY
+   - The logical flaw in the implementation
+
+3. Minimal Reproduction (20% of score)
+   - A minimal code snippet that reproduces JUST this bug
+   - Strip away all unnecessary complexity
+   - Show the exact sequence that triggers the issue
+
+4. The Fix
+   - Fixed version of the buggy code
+   - Explanation of WHY your fix addresses the root cause
+   - All tests should pass after your fix
+
+=== CONSTRAINTS ===
+- Do not modify the test file (test_lru_cache.py)
+- Maintain the existing API of the LRUCache class
+- Your fix must address the root cause, not just work around symptoms
+- Focus on explaining WHY the bug occurs, not just what is wrong
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.

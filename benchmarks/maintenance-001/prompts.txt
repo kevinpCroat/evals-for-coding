@@ -1,0 +1,27 @@
+=== TASK ===
+Update all dependencies in this Python project to their latest stable versions and fix any security vulnerabilities. The project has dependencies from 2021 that have known CVEs and need to be updated.
+
+=== CONTEXT ===
+This is a Flask-based user management application with:
+- src/api_client.py - HTTP API client using requests library
+- src/web_app.py - Flask web application with REST endpoints
+- tests/ - Comprehensive test suite (all tests currently pass)
+- KNOWN_ISSUES.md - Documentation of security vulnerabilities in current dependencies
+
+The project uses old versions of Flask (1.1.2), Werkzeug (1.0.1), requests (2.25.0), and other libraries from 2021. These have known security vulnerabilities and deprecated features.
+
+=== DELIVERABLES ===
+1. Updated requirements.txt with latest stable versions of all dependencies
+2. Modified source code (if needed) to work with updated dependencies
+3. All tests passing with the new dependency versions
+4. No deprecation warnings when running tests
+
+=== CONSTRAINTS ===
+- Do NOT modify test files - they define the expected behavior
+- Do NOT add new dependencies - only update existing ones
+- Must fix security issues: Flask >= 2.3.0, Werkzeug >= 2.3.0, requests >= 2.31.0
+- All existing tests must pass
+- No deprecation warnings should appear when running tests
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.

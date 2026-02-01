@@ -1,0 +1,42 @@
+=== TASK ===
+Rewrite the recursive tree traversal functions in starter-code/tree_traversal.py to use iterative implementations with explicit stacks instead of recursion.
+
+=== CONTEXT ===
+The file starter-code/tree_traversal.py contains 6 functions that currently use recursion:
+- inorder_traversal() - In-order tree traversal
+- postorder_traversal() - Post-order tree traversal
+- max_depth() - Calculate maximum tree depth
+- find_path_sum() - Find if a root-to-leaf path sum exists
+- collect_leaves() - Collect all leaf node values
+- tree_map() - Apply a function to all nodes
+
+All functions must be rewritten to use iterative approaches with explicit stack data structures (lists or deques) while maintaining identical behavior.
+
+A comprehensive test suite is provided in starter-code/test_tree_traversal.py with 40+ tests covering:
+- Normal cases (balanced trees, various structures)
+- Edge cases (empty trees, single nodes, deep trees)
+- Performance tests (100+ level deep trees)
+
+=== DELIVERABLES ===
+1. Modified starter-code/tree_traversal.py with all 6 functions rewritten iteratively
+2. All function signatures must remain unchanged
+3. All tests must pass (run: pytest starter-code/test_tree_traversal.py -v)
+4. Code should include clear comments explaining the stack-based approach
+
+=== CONSTRAINTS ===
+- Do NOT modify the TreeNode class definition
+- Do NOT modify function signatures (names, parameters, return types)
+- Do NOT use helper functions that are themselves recursive
+- Must use explicit data structures (lists/deques) as stacks
+- Must preserve all type hints
+- Performance should not degrade more than 20%
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+
+The verification script will:
+1. Run all tests and check pass rate (60% of score)
+2. Compare performance against recursive baseline (20% of score)
+3. Verify specific edge cases pass (20% of score)
+
+Minimum passing score: 70/100

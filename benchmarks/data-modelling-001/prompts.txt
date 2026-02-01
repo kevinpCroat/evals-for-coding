@@ -1,0 +1,76 @@
+=== TASK ===
+Design and implement a complete database schema for a blog platform using SQLAlchemy ORM. You need to create models with proper relationships, constraints, indexes, and an initial migration script.
+
+=== CONTEXT ===
+Read requirements.md for complete business requirements including:
+- 7 entities to model (User, Article, Category, Tag, Comment, ArticleTag, UserFollow)
+- Relationship definitions and cardinality
+- Business rules and constraints
+- Query requirements for index optimization
+
+Read spec.md for technical specifications including:
+- Exact deliverables needed
+- SQLAlchemy and Alembic requirements
+- Success criteria and scoring breakdown
+
+=== DELIVERABLES ===
+Create the following files in /Users/kperko/code/evals-for-coding/benchmarks/data-modelling-001/:
+
+1. models.py
+   - All 7 SQLAlchemy model classes
+   - Proper field types with constraints (unique, not null, etc.)
+   - All relationships (one-to-many, many-to-many) with back_populates
+   - Indexes for high-priority queries
+   - Cascade delete configurations
+   - __repr__ methods for debugging
+
+2. alembic.ini
+   - Standard Alembic configuration
+   - Configured for SQLite (file: blog.db)
+
+3. alembic/env.py
+   - Alembic environment setup
+   - Import your models
+   - Configure target metadata
+
+4. alembic/script.py.mako
+   - Standard Alembic migration template
+
+5. alembic/versions/001_initial_schema.py
+   - Initial migration that creates all tables
+   - Include all indexes and constraints
+   - Proper upgrade() and downgrade() functions
+
+6. requirements.txt
+   - SQLAlchemy>=2.0
+   - Alembic>=1.12
+   - psycopg2-binary
+
+=== CONSTRAINTS ===
+- Use SQLAlchemy 2.0+ declarative syntax
+- Use timezone-aware datetime fields (UTC)
+- Use Integer primary keys (not UUIDs)
+- Follow all business rules from requirements.md:
+  - Unique constraints on email, username, slugs, tag names
+  - Proper cascade delete behaviors
+  - Prevent users from following themselves
+  - Default values for status fields and counters
+- Add indexes for all high-priority queries listed in requirements.md
+- Use SQLAlchemy Enum for status fields
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+
+The scoring breakdown:
+- Schema Validity (30%): Models create tables without errors
+- Relationships (25%): All relationships work bidirectionally
+- Constraints (20%): Database enforces data integrity rules
+- Migrations (15%): Alembic migration runs successfully
+- Query Performance (10%): Required indexes are present
+
+Focus on:
+1. Correctly modeling all 7 entities with proper field types
+2. Implementing all relationships with foreign keys
+3. Adding all constraints (unique, not null, foreign key, check)
+4. Creating indexes for common query patterns
+5. Writing a working Alembic migration script

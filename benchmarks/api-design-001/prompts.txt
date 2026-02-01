@@ -1,0 +1,60 @@
+=== TASK ===
+Design a comprehensive OpenAPI 3.0 specification for an e-commerce order management REST API. The API should follow REST best practices and be production-ready.
+
+=== CONTEXT ===
+You are the API architect for a growing e-commerce platform. The company needs a well-designed REST API to support their web and mobile applications for managing the complete order lifecycle.
+
+Review the requirements document at: requirements.md
+Review the full specification at: spec.md
+
+The API must handle these core resources:
+- Products (catalog, inventory, variants)
+- Customers (profiles, addresses, authentication)
+- Orders (creation, tracking, status management)
+- Payments (processing, multiple payment methods)
+- Shipments (tracking, carrier integration)
+- Shopping Cart (session management, item operations)
+- Reviews (product ratings and feedback)
+
+=== DELIVERABLES ===
+1. Create a file named `openapi.yaml` (or `openapi.json`) in the root directory
+2. The specification must be valid OpenAPI 3.0.x format
+3. Include all required sections:
+   - API info (title, version, description)
+   - Servers
+   - Paths (minimum 25 distinct endpoint paths)
+   - Components (schemas, security schemes, responses)
+   - Security definitions
+4. All endpoints must have:
+   - Complete request/response schemas
+   - Appropriate HTTP methods and status codes
+   - Error response definitions
+   - Security requirements
+   - Clear descriptions
+5. Follow REST best practices:
+   - Proper HTTP methods (GET, POST, PUT, PATCH, DELETE)
+   - Correct status codes (200, 201, 204, 400, 401, 403, 404, 409, 422, 500)
+   - Resource-based URL structure with versioning
+   - Pagination, filtering, and sorting support
+6. Optional but recommended: Create `API.md` with overview and usage guide
+
+=== CONSTRAINTS ===
+- Must be valid OpenAPI 3.0.x (parseable by validation tools)
+- Include API versioning in URL structure (e.g., /v1/)
+- Define security scheme (JWT recommended)
+- All schemas must include descriptions and examples
+- Support role-based access control
+- Include error handling for all endpoints
+- Follow consistent naming conventions
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+
+The scoring criteria:
+- Required Endpoints (30%): All core operations covered
+- Schema Completeness (25%): Full request/response definitions
+- REST Best Practices (25%): Proper methods, status codes, URL structure
+- Documentation Quality (10%): Clear descriptions and examples
+- Versioning Strategy (10%): Clear versioning approach
+
+Pass threshold: 70/100
