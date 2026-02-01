@@ -409,6 +409,60 @@ Contributions welcome! To add a new benchmark:
 
 See [PHASE3_COMPLETE.md](PHASE3_COMPLETE.md) for lessons learned and best practices.
 
+## MCP Server - AI Agent Integration
+
+🚀 **NEW:** Model Context Protocol (MCP) server for programmatic access to benchmarks!
+
+The MCP server allows AI agents to interact with the evaluation framework programmatically. Perfect for:
+- **AI Self-Evaluation** - Models can test themselves
+- **Automated Testing** - CI/CD integration
+- **Research** - Compare multiple models systematically
+- **Progress Tracking** - Monitor improvement over time
+
+### 8 Available Tools
+
+1. **list_benchmarks** - List all benchmarks with metadata (filter by category, difficulty, tier)
+2. **get_benchmark_spec** - Get detailed specification for a benchmark
+3. **get_benchmark_prompts** - Get AI instructions
+4. **get_starter_code_structure** - View file structure
+5. **run_benchmark** - Execute verification and get score
+6. **get_results_history** - View historical results
+7. **generate_leaderboard** - Create leaderboard from results
+8. **get_benchmark_categories** - Get taxonomy of 20 evaluation areas
+
+### Quick Setup
+
+```bash
+# Install and build
+cd mcp-server
+npm install
+npm run build
+
+# Configure Claude Desktop
+# Add to ~/Library/Application Support/Claude/claude_desktop_config.json:
+{
+  "mcpServers": {
+    "evals-for-coding": {
+      "command": "node",
+      "args": ["/absolute/path/to/evals-for-coding/mcp-server/dist/index.js"]
+    }
+  }
+}
+
+# Restart Claude Desktop
+```
+
+### Example Usage in Claude
+
+Once configured, you can ask Claude:
+- "Show me all available benchmarks"
+- "Get the specification for security-001"
+- "Run the bug-fixing-001 benchmark and show me the results"
+- "What categories of benchmarks are available?"
+- "Show me the history of my security-001 attempts"
+
+**Full Documentation:** [mcp-server/README.md](mcp-server/README.md) | [Setup Guide](mcp-server/SETUP.md)
+
 ## Project Status
 
 **✅ COMPLETE** - All 20 benchmarks delivered and validated.
@@ -424,12 +478,21 @@ The framework is:
 
 ## Documentation
 
+### Project Documentation
 - [PHASE3_COMPLETE.md](PHASE3_COMPLETE.md) - Complete project summary and achievements
 - [PHASE2_COMPLETE.md](PHASE2_COMPLETE.md) - Phase 2 development summary
 - [claude_token_summary.md](claude_token_summary.md) - Development metrics and tool usage
+- [PODCAST_SUMMARY.md](PODCAST_SUMMARY.md) - 45-minute podcast episode outline
+- [ARCHITECTURE.md](ARCHITECTURE.md) - System architecture with diagrams
+
+### Evaluation Framework
 - [Evaluation Areas](software-engineering-evaluation-areas.md) - 20 areas across 5 categories
 - [Verification Strategies](verification-strategies.md) - Detailed verification approach
 - [Benchmark Prioritization](benchmark-prioritization.md) - Development roadmap
+
+### MCP Server
+- [MCP Server README](mcp-server/README.md) - API reference and examples
+- [MCP Setup Guide](mcp-server/SETUP.md) - Installation and configuration
 
 ## License
 

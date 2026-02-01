@@ -1,0 +1,29 @@
+{
+  "name": "@evals-for-coding/mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for AI coding evaluation framework",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "ai",
+    "coding",
+    "evaluation",
+    "benchmarks"
+  ],
+  "author": "Kevin Perko",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "evals-for-coding": {
+      "command": "node",
+      "args": [
+        "/ABSOLUTE/PATH/TO/evals-for-coding/mcp-server/dist/index.js"
+      ],
+      "env": {}
+    }
+  }
+}
