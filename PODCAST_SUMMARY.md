@@ -365,6 +365,10 @@ Pass Threshold = 70/100
 
 > "We built 20 production-ready benchmarks in 8 hours. That's 35,000 lines of code, 600 tests, and 90+ documentation files. Modern AI development tools are incredible multipliers."
 
+> "With the MCP server, AI agents can now autonomously evaluate themselves. Claude built the benchmarks, built the evaluation server, and can now use that server to test its own capabilities. That's the full circle of AI-assisted development."
+
+> "The really meta moment: An AI agent can discover it's weak at security, practice on security-001, re-evaluate itself, and track its own improvement—all without human intervention."
+
 ---
 
 ## Actionable Insights for Listeners
@@ -400,8 +404,11 @@ Pass Threshold = 70/100
 - [Evaluation Areas Taxonomy](software-engineering-evaluation-areas.md)
 - [Verification Strategies](verification-strategies.md)
 - [Development Metrics](claude_token_summary.md)
+- [Architecture Documentation](ARCHITECTURE.md)
+- [MCP Server README](mcp-server/README.md)
+- [MCP Setup Guide](mcp-server/SETUP.md)
 
-**Quick Start:**
+**Quick Start (Manual Evaluation):**
 ```bash
 # Clone the repo
 git clone https://github.com/kevinpCroat/evals-for-coding.git
@@ -414,6 +421,182 @@ cd benchmarks/security-001
 python evaluation-framework/run_benchmark.py --all
 ```
 
+**Quick Start (MCP Server for AI Agents):**
+```bash
+# Install MCP server
+cd mcp-server
+npm install && npm run build
+
+# Configure Claude Desktop
+# Add to ~/Library/Application Support/Claude/claude_desktop_config.json
+{
+  "mcpServers": {
+    "evals-for-coding": {
+      "command": "node",
+      "args": ["/absolute/path/to/mcp-server/dist/index.js"]
+    }
+  }
+}
+
+# Restart Claude Desktop
+# Now Claude can autonomously interact with benchmarks!
+```
+
+---
+
+## Bonus: MCP Server - Making It Accessible to AI Agents
+
+**[45:00 - 50:00] The MCP Server Addition**
+
+After completing the 20 benchmarks, we added one more critical piece: **programmatic access for AI agents**.
+
+### The Problem
+
+The benchmarks were great for human-driven evaluation, but what if AI models wanted to evaluate themselves? What if researchers wanted to automate testing across multiple models?
+
+We needed a way for AI agents to:
+- Discover available benchmarks
+- Read specifications programmatically
+- Execute benchmarks autonomously
+- Track their own progress
+- Generate comparative leaderboards
+
+### The Solution: Model Context Protocol (MCP) Server
+
+We built a complete MCP server that exposes 8 tools through the Model Context Protocol:
+
+**Discovery Tools:**
+1. `list_benchmarks` - Filter by category, difficulty, tier
+2. `get_benchmark_spec` - Read full specifications
+3. `get_benchmark_prompts` - Get AI instructions
+4. `get_starter_code_structure` - View file tree
+
+**Execution Tools:**
+5. `run_benchmark` - Execute verification, get scores
+6. `get_results_history` - Track attempts over time
+
+**Analysis Tools:**
+7. `generate_leaderboard` - Compare performance
+8. `get_benchmark_categories` - Understand taxonomy
+
+### The Implementation
+
+**Technology Stack:**
+- TypeScript + MCP SDK
+- stdio-based communication
+- 900+ lines of server code
+- Full integration with existing benchmarks
+
+**Development Time:** ~30 minutes
+- Leveraged established patterns
+- Clear MCP protocol specifications
+- Well-structured existing codebase
+
+### Use Cases
+
+**AI Self-Evaluation:**
+```typescript
+// Claude can now autonomously:
+1. list_benchmarks({ difficulty: "Easy" })
+2. get_benchmark_spec({ benchmark_id: "bug-fixing-001" })
+3. [implement solution using file tools]
+4. run_benchmark({ benchmark_id: "bug-fixing-001" })
+5. get_results_history({ benchmark_id: "bug-fixing-001" })
+// Track improvement across attempts!
+```
+
+**Automated Research:**
+```typescript
+// Researchers can:
+for (model in [Claude, GPT4, Gemini]) {
+  for (benchmark in all_benchmarks) {
+    result = model.run_benchmark(benchmark)
+    store_result(model, benchmark, result)
+  }
+}
+generate_leaderboard()
+// Comprehensive model comparison!
+```
+
+**CI/CD Integration:**
+```typescript
+// Development teams can:
+before_deploy() {
+  critical_benchmarks = list_benchmarks({ category: "Security" })
+  for (benchmark in critical_benchmarks) {
+    result = run_benchmark(benchmark)
+    if (!result.passed) {
+      abort_deployment()
+    }
+  }
+}
+```
+
+### Why This Matters
+
+**Democratizes Evaluation:**
+- Any AI agent can now self-evaluate
+- No human intervention needed
+- Fully automated pipeline
+
+**Enables Research at Scale:**
+- Compare dozens of models overnight
+- Track improvement across versions
+- Statistical significance testing
+
+**Closes the Loop:**
+- AI builds the benchmarks (via sub-agents)
+- AI runs the benchmarks (via MCP)
+- AI analyzes the results (via leaderboard tool)
+- **Fully autonomous evaluation pipeline**
+
+### Example Interaction
+
+**User to Claude:** "Evaluate yourself on all Easy benchmarks"
+
+**Claude's Internal Process:**
+1. `list_benchmarks({ difficulty: "Easy" })` → [bug-fixing-001, documentation-001, prototyping-001]
+2. For each benchmark:
+   - `get_benchmark_spec(id)` → understand task
+   - Implement solution using file tools
+   - `run_benchmark(id)` → get score
+3. Report results to user
+
+**Output:**
+```
+bug-fixing-001: PASS (95/100)
+documentation-001: PASS (88/100)
+prototyping-001: PASS (92/100)
+Average: 91.7/100
+```
+
+**Completely autonomous!**
+
+### Integration
+
+**Claude Desktop Setup:**
+```json
+{
+  "mcpServers": {
+    "evals-for-coding": {
+      "command": "node",
+      "args": ["/path/to/mcp-server/dist/index.js"]
+    }
+  }
+}
+```
+
+Restart Claude → Tools available immediately
+
+### The Meta Aspect
+
+The really interesting thing? **This entire MCP server was built by Claude Code itself.**
+
+- Claude built the benchmarks
+- Claude built the MCP server to access the benchmarks
+- Claude can now use the MCP server to evaluate its own capabilities
+- **Full circle of AI-assisted development and evaluation**
+
 ---
 
 ## Closing Thoughts
@@ -422,17 +605,36 @@ This project demonstrates that comprehensive, production-ready benchmarks can be
 
 But more importantly, it shows that evaluating AI coding assistants requires moving beyond simple function-writing tasks. Real software engineering is complex, multifaceted, and context-dependent. Our benchmark suite is the first to comprehensively cover the entire software development lifecycle.
 
-**The future of AI coding evaluation is here—and it's open source.**
+**And now, with the MCP server, AI agents can autonomously participate in their own evaluation—making this a truly self-sustaining evaluation framework.**
+
+**The future of AI coding evaluation is here—it's open source, and it's self-evaluating.**
 
 ---
 
 ## Call to Action
 
 1. **Star the repository** on GitHub
-2. **Run the benchmarks** on your favorite AI coding assistant
-3. **Share your results** and contribute to the leaderboard
-4. **Build new benchmarks** using the template system
-5. **Join the conversation** about how we evaluate AI coding capabilities
+2. **Try the MCP server** - Let AI agents evaluate themselves
+3. **Run the benchmarks** on your favorite AI coding assistant
+4. **Share your results** and contribute to the leaderboard
+5. **Build new benchmarks** using the template system
+6. **Integrate into CI/CD** - Automated quality gates
+7. **Join the conversation** about how we evaluate AI coding capabilities
+
+**For AI Researchers:**
+- Use the MCP server to compare models at scale
+- Generate comprehensive leaderboards
+- Publish comparative studies
+
+**For AI Development Teams:**
+- Track capability regression across model versions
+- Identify systematic weaknesses
+- Set benchmark-based quality gates
+
+**For AI Agents (Yes, Really!):**
+- Install the MCP server in Claude Desktop
+- Ask Claude to evaluate itself
+- Watch autonomous self-improvement in action
 
 ---
 
