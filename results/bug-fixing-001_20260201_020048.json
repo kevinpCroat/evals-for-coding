@@ -1,0 +1,36 @@
+{
+  "benchmark": "bug-fixing-001",
+  "timestamp": "2026-02-01T02:00:47Z",
+  "components": {
+    "bug_fixed": {
+      "score": 0,
+      "weight": 0.6,
+      "details": "The target test is still failing"
+    },
+    "no_regressions": {
+      "score": 0,
+      "weight": 0.3,
+      "details": "Only 17/18 tests pass"
+    },
+    "code_quality": {
+      "score": 100,
+      "weight": 0.1,
+      "details": "Minimal changes detected"
+    }
+  },
+  "test_summary": {
+    "total_tests": 18,
+    "passed_tests": 17,
+    "failed_tests": 2
+  },
+  "base_score": 10,
+  "penalties": {
+    "time_penalty": 0,
+    "iteration_penalty": 0,
+    "error_penalty": 0
+  },
+  "final_score": 10,
+  "passed": false,
+  "exit_code": 1,
+  "execution_time_ms": null
+}
