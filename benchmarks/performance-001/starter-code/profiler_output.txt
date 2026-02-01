@@ -1,0 +1,35 @@
+PROFILER OUTPUT - Performance Analysis
+================================================================================
+
+Dataset: 5000 log entries (1000 users, 5 entries each)
+
+Top 20 functions by cumulative time:
+================================================================================
+         125112520 function calls (125112500 primitive calls) in 15.376 seconds
+
+   Ordered by: cumulative time
+   List reduced from 54 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   15.376   15.376 /Users/kperko/code/evals-for-coding/benchmarks/performance-001/starter-code/data_processor.py:110(process_all)
+        1    4.100    4.100   15.335   15.335 /Users/kperko/code/evals-for-coding/benchmarks/performance-001/starter-code/data_processor.py:22(find_duplicate_sessions)
+ 25015000    2.923    0.000   10.122    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/re.py:198(search)
+ 25015000    2.887    0.000    4.112    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/re.py:289(_compile)
+ 25015000    3.087    0.000    3.087    0.000 {method 'search' of 're.Pattern' objects}
+ 25015051    1.225    0.000    1.225    0.000 {built-in method builtins.isinstance}
+ 25015000    1.117    0.000    1.117    0.000 {method 'group' of 're.Match' objects}
+        1    0.035    0.035    0.035    0.035 /Users/kperko/code/evals-for-coding/benchmarks/performance-001/starter-code/data_processor.py:85(get_top_users)
+        1    0.002    0.002    0.007    0.007 /Users/kperko/code/evals-for-coding/benchmarks/performance-001/starter-code/data_processor.py:58(compute_session_stats)
+    26124    0.001    0.000    0.001    0.000 {method 'append' of 'list' objects}
+11064/11058    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        2    0.000    0.000    0.000    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/sre_compile.py:759(compile)
+        2    0.000    0.000    0.000    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/sre_parse.py:937(parse)
+      4/2    0.000    0.000    0.000    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/sre_parse.py:435(_parse_sub)
+      4/2    0.000    0.000    0.000    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/sre_parse.py:493(_parse)
+        2    0.000    0.000    0.000    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/sre_compile.py:598(_code)
+      6/2    0.000    0.000    0.000    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/sre_compile.py:71(_compile)
+        2    0.000    0.000    0.000    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/sre_compile.py:536(_compile_info)
+      4/2    0.000    0.000    0.000    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/sre_compile.py:461(_get_literal_prefix)
+      8/4    0.000    0.000    0.000    0.000 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/sre_parse.py:174(getwidth)
+
+

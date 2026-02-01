@@ -1,0 +1,43 @@
+=== TASK ===
+Build a proof-of-concept CLI tool that demonstrates real-time file watching and cloud synchronization. This is a prototyping exercise to validate technical feasibility.
+
+=== CONTEXT ===
+Read the full specification in spec.md and the technical question in technical_question.md.
+
+Your goal is to quickly build a working demo that answers the question: "Can we build a CLI tool that watches local files and syncs them to cloud storage in real-time?"
+
+This is NOT about production-quality code. Focus on:
+- Getting something working fast
+- Demonstrating the core concept
+- Keeping it simple (minimal code, minimal dependencies)
+- Making it runnable and observable
+
+=== DELIVERABLES ===
+1. Python script(s) implementing a file watching + sync CLI tool
+2. README.md with usage instructions and demo steps
+3. requirements.txt (if you use any dependencies beyond standard library)
+4. Working demo that can be executed to show the concept
+
+=== CONSTRAINTS ===
+- Use Python (3.7+)
+- Must work on Unix-like systems (Linux/macOS)
+- Prefer minimal dependencies (standard library is best)
+- Can mock/simulate the cloud backend (no real cloud API needed)
+- Should be buildable in 20-30 minutes
+- Focus on demonstrating feasibility, not building production features
+
+=== APPROACH ===
+Think like you're doing a quick technical spike:
+1. Start with the simplest thing that could work
+2. File watching: Use a library like `watchdog` or implement basic polling
+3. Cloud sync: Mock it with a local directory or simple data structure
+4. CLI: Can be a simple Python script with command-line arguments
+5. Test it works by creating/modifying files and seeing them "sync"
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+Your prototype will be scored on:
+- Does the demo actually run? (40%)
+- Does it answer the feasibility question? (30%)
+- Is it simple and easy to understand? (20%)
+- Was it built quickly/iteratively? (10%)

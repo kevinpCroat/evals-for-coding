@@ -1,0 +1,52 @@
+=== TASK ===
+Design a comprehensive system architecture for a real-time collaborative document editing platform. You must create Architecture Decision Records (ADRs), architectural diagrams, and trade-off analysis documenting your design choices.
+
+=== CONTEXT ===
+You are the lead architect for a startup building a collaborative document editing platform (similar to Google Docs). The business requirements are provided in requirements.md, and the detailed specification is in spec.md.
+
+Your architecture must:
+- Support 100,000 concurrent users with <100ms P95 latency for real-time edits
+- Provide 99.9% availability with zero data loss
+- Be cloud-native, horizontally scalable, and multi-region capable
+- Comply with SOC 2, GDPR, and CCPA requirements
+
+Many technical decisions are intentionally left open for you to decide. There is no single "correct" solution - focus on clearly documenting your reasoning and trade-offs.
+
+=== DELIVERABLES ===
+Create the following files:
+
+1. architecture.md - Comprehensive architecture overview with:
+   - Executive summary
+   - System components and their responsibilities
+   - Technology stack with justifications
+   - Data flow descriptions
+   - Scalability, security, and operational strategies
+
+2. adrs/ directory - 3-5 Architecture Decision Records covering major decisions such as:
+   - Real-time collaboration approach (OT vs CRDT)
+   - Database selection
+   - Real-time communication protocol
+   - Multi-region strategy
+   - System architecture pattern (monolith vs microservices)
+
+   Each ADR must include: Status, Context, Decision, Consequences (positive/negative), and Alternatives Considered
+
+3. diagrams/ directory - Text-based diagrams (Mermaid/PlantUML/ASCII):
+   - component-diagram.md - Major services and their relationships
+   - deployment-diagram.md - Infrastructure and deployment topology
+   - data-flow-diagram.md - Key data flows through the system
+
+4. trade-offs.md - Analysis of key architectural trade-offs:
+   - Alternatives considered for each major decision
+   - Evaluation criteria and reasoning
+   - What you're gaining vs. sacrificing
+   - Risk mitigation strategies
+
+=== CONSTRAINTS ===
+- Focus on clarity, technical soundness, and thorough analysis of alternatives
+- Your architecture should be implementable by a real engineering team
+- Be specific and concrete - avoid vague statements
+- Consider real-world constraints: cost, complexity, time-to-market, team expertise
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.

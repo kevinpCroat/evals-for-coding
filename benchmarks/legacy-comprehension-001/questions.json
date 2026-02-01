@@ -1,0 +1,164 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "category": "architecture",
+      "question": "What are the main components/modules of this invoice processing system?",
+      "answer": "The system has 6 main modules: invoice.py (core invoice and item models), tax_calculator.py (tax calculation logic), payment_processor.py (payment gateway integration), database.py (data persistence), workflow.py (business process orchestration), and validators.py (validation logic).",
+      "keywords": ["invoice", "tax", "payment", "database", "workflow", "validators"],
+      "weight": 1.0
+    },
+    {
+      "id": 2,
+      "category": "architecture",
+      "question": "How is the invoice state machine designed? What are the valid invoice statuses?",
+      "answer": "The invoice has 5 states: DRAFT (initial), PENDING (submitted for approval), APPROVED (approved and ready for payment), PAID (payment completed), and CANCELLED. The flow is typically DRAFT -> PENDING -> APPROVED -> PAID, with CANCELLED available from most states except PAID.",
+      "keywords": ["DRAFT", "PENDING", "APPROVED", "PAID", "CANCELLED"],
+      "weight": 1.0
+    },
+    {
+      "id": 3,
+      "category": "dependencies",
+      "question": "Which modules depend on the Invoice class from invoice.py?",
+      "answer": "The database.py module imports Invoice to deserialize invoice data, the workflow.py module imports Invoice to create new invoices, and payment_processor.py indirectly depends on it through the invoice_db parameter.",
+      "keywords": ["database", "workflow", "deserialize", "create"],
+      "weight": 1.5
+    },
+    {
+      "id": 4,
+      "category": "dependencies",
+      "question": "What external dependencies does the TaxCalculator have?",
+      "answer": "TaxCalculator has no external dependencies - it's a standalone class. However, it is imported and used by the Invoice class in invoice.py (via the calculate_tax method), and TaxExemptionChecker depends on CustomerDatabase.",
+      "keywords": ["standalone", "Invoice", "calculate_tax", "CustomerDatabase"],
+      "weight": 1.0
+    },
+    {
+      "id": 5,
+      "category": "data_flow",
+      "question": "How does tax calculation flow through the system when getting an invoice total?",
+      "answer": "When Invoice.get_total() is called, it first calculates the subtotal from items, then calls calculate_tax() which imports TaxCalculator, creates an instance, and calls calculate_invoice_tax(). TaxCalculator iterates through each item, gets the tax rate based on tax_code and customer_id, and sums up the tax for all items.",
+      "keywords": ["get_total", "calculate_tax", "TaxCalculator", "calculate_invoice_tax", "tax_code", "customer_id"],
+      "weight": 1.5
+    },
+    {
+      "id": 6,
+      "category": "data_flow",
+      "question": "Trace the data flow when a payment is processed for an invoice.",
+      "answer": "PaymentProcessor.process_invoice_payment() retrieves the invoice from invoice_db, validates it's approved, gets the total, calls gateway.charge() with payment method and metadata. On success, it calls invoice.mark_paid() with the transaction_id, which updates the invoice status to PAID and stores payment metadata, then saves the invoice back to invoice_db.",
+      "keywords": ["process_invoice_payment", "invoice_db", "gateway.charge", "mark_paid", "PAID", "save_invoice"],
+      "weight": 1.5
+    },
+    {
+      "id": 7,
+      "category": "change_impact",
+      "question": "If I change the Invoice.STATUS_APPROVED constant to a different value, what would break?",
+      "answer": "This would break PaymentProcessor.process_invoice_payment() which checks if invoice.status == invoice.STATUS_APPROVED, workflow.py's approve_invoice() method which sets this status, and the process_overdue_invoices() method which filters by APPROVED status. Any existing saved invoice data with the old status value would also fail status comparisons.",
+      "keywords": ["PaymentProcessor", "process_invoice_payment", "workflow", "approve_invoice", "process_overdue_invoices"],
+      "weight": 2.0
+    },
+    {
+      "id": 8,
+      "category": "change_impact",
+      "question": "What would happen if I removed the _cache from InvoiceDatabase?",
+      "answer": "Removing the cache would cause every get_invoice() call to read from disk, significantly impacting performance. The workflow module calls get_invoice() multiple times for operations like submit, approve, and reject. Payment processing would also be slower. However, functionality would still work correctly, just slower.",
+      "keywords": ["performance", "get_invoice", "disk", "workflow", "slower"],
+      "weight": 1.0
+    },
+    {
+      "id": 9,
+      "category": "business_logic",
+      "question": "What is the purpose of the auto-approval logic in InvoiceWorkflow?",
+      "answer": "The _should_auto_approve() method automatically approves invoices without manual review in two cases: if the total is less than $100 (low-value transactions), or if the customer has a 'trusted' flag set to True. When submit_invoice() is called, it checks this condition and calls approve_invoice() with 'SYSTEM_AUTO' as the approver.",
+      "keywords": ["_should_auto_approve", "total", "100", "trusted", "SYSTEM_AUTO"],
+      "weight": 1.0
+    },
+    {
+      "id": 10,
+      "category": "business_logic",
+      "question": "How does the payment retry mechanism work in PaymentProcessor?",
+      "answer": "The process_invoice_payment() method attempts payment up to retry_attempts (default 3) times. It loops through attempts, calling gateway.charge(). If successful, it immediately returns. If the error is CARD_DECLINED, it breaks out of the retry loop (no point retrying). For other errors, it continues retrying. After all attempts fail, it returns the last error.",
+      "keywords": ["retry_attempts", "3", "gateway.charge", "CARD_DECLINED", "break", "loop"],
+      "weight": 1.5
+    },
+    {
+      "id": 11,
+      "category": "dependencies",
+      "question": "What circular dependency risk exists between invoice.py and tax_calculator.py?",
+      "answer": "invoice.py imports TaxCalculator inside the calculate_tax() method (local import), not at the module level. This avoids a potential circular dependency since tax_calculator.py doesn't import invoice.py directly, though TaxExemptionChecker takes a customer_db parameter. The local import is a workaround for this design issue.",
+      "keywords": ["local import", "calculate_tax", "circular", "module level", "workaround"],
+      "weight": 2.0
+    },
+    {
+      "id": 12,
+      "category": "data_flow",
+      "question": "How does invoice serialization and deserialization work in the database module?",
+      "answer": "_serialize_invoice() converts an Invoice object to a dict using to_dict(), then manually extracts item details into items_detail array. _deserialize_invoice() does the reverse: creates an Invoice object, sets all properties, then recreates InvoiceItem objects from items_detail and adds them to the invoice using add_item().",
+      "keywords": ["_serialize_invoice", "to_dict", "items_detail", "_deserialize_invoice", "InvoiceItem", "add_item"],
+      "weight": 1.5
+    },
+    {
+      "id": 13,
+      "category": "architecture",
+      "question": "What design patterns can you identify in this codebase?",
+      "answer": "The code uses several patterns: Strategy pattern (PaymentGateway with test/real modes), Repository pattern (InvoiceDatabase, CustomerDatabase for data access), State machine (Invoice status transitions), Dependency Injection (passing database instances to workflow and processors), and Observer pattern (notification_handlers in workflow).",
+      "keywords": ["Strategy", "Repository", "State machine", "Dependency Injection", "Observer", "notification_handlers"],
+      "weight": 1.5
+    },
+    {
+      "id": 14,
+      "category": "business_logic",
+      "question": "How does the system handle tax exemptions?",
+      "answer": "TaxExemptionChecker checks if a customer is tax exempt by looking for a tax_exempt flag or if their tax_id starts with 'EX-'. It can validate exemption certificates with format EXC-XXXXXX-XX and compare them to stored certificates. However, this doesn't integrate with TaxCalculator - it's a separate validation mechanism.",
+      "keywords": ["TaxExemptionChecker", "tax_exempt", "EX-", "exemption certificate", "EXC-", "validation"],
+      "weight": 1.0
+    },
+    {
+      "id": 15,
+      "category": "change_impact",
+      "question": "If I modified InvoiceItem.get_total() to round to 2 decimal places, what could break?",
+      "answer": "This would affect all invoice calculations: Invoice.get_subtotal() sums item totals, which feeds into tax calculation and final total. The change could cause small rounding discrepancies when totals are recalculated vs cached values (_cached_total). Tests comparing exact decimal amounts might fail. Payment amounts sent to the gateway would be rounded differently.",
+      "keywords": ["get_subtotal", "tax calculation", "_cached_total", "rounding", "payment", "gateway"],
+      "weight": 1.5
+    },
+    {
+      "id": 16,
+      "category": "business_logic",
+      "question": "What happens when an invoice is rejected in the workflow?",
+      "answer": "The reject_invoice() method changes the invoice status back to DRAFT, stores rejected_by, rejected_date, and rejection_reason in metadata, saves to database, and triggers an 'invoice_rejected' notification. The invoice can then be modified and resubmitted. Only PENDING invoices can be rejected.",
+      "keywords": ["reject_invoice", "DRAFT", "rejected_by", "rejected_date", "rejection_reason", "PENDING", "notification"],
+      "weight": 1.0
+    },
+    {
+      "id": 17,
+      "category": "architecture",
+      "question": "How does the system handle regional tax differences?",
+      "answer": "TaxCalculator has SPECIAL_REGIONS dict mapping region codes (EU, CA, UK) to their tax rates. When set_region() is called with a valid code, get_tax_rate() checks regional rates before falling back to default TAX_RATES. Additionally, it supports customer-specific tax overrides via add_tax_override().",
+      "keywords": ["SPECIAL_REGIONS", "set_region", "get_tax_rate", "regional rates", "tax_override", "EU", "CA", "UK"],
+      "weight": 1.0
+    },
+    {
+      "id": 18,
+      "category": "data_flow",
+      "question": "How does the refund process work end-to-end?",
+      "answer": "PaymentProcessor.process_refund() gets the invoice, validates it's PAID status, retrieves payment_id from metadata, calls gateway.refund() with the transaction_id and optional amount. The gateway finds the original transaction, validates the refund amount, generates a refund_id, and returns success. The processor then stores refund_id, refund_amount, and refund_date in invoice metadata and saves it.",
+      "keywords": ["process_refund", "PAID", "payment_id", "gateway.refund", "refund_id", "refund_amount", "metadata"],
+      "weight": 1.5
+    },
+    {
+      "id": 19,
+      "category": "change_impact",
+      "question": "What would break if CustomerDatabase.get_customer() returned None for a valid customer?",
+      "answer": "InvoiceWorkflow.create_invoice() would raise ValueError. The _should_auto_approve() logic wouldn't find the 'trusted' flag, preventing auto-approval. TaxCalculator wouldn't apply customer-specific tax overrides. TaxExemptionChecker methods would return False/None. PaymentProcessor would still work as it doesn't directly check customer existence.",
+      "keywords": ["create_invoice", "ValueError", "_should_auto_approve", "trusted", "tax overrides", "TaxExemptionChecker"],
+      "weight": 2.0
+    },
+    {
+      "id": 20,
+      "category": "business_logic",
+      "question": "How does the invoice validation logic ensure data integrity?",
+      "answer": "InvoiceValidator.validate_invoice() runs five checks: _validate_basic_fields (ID format, required fields), _validate_items (positive quantities/prices, descriptions), _validate_amounts (subtotal >= 0, total >= subtotal), _validate_dates (created <= now, due >= created), and _validate_status_transitions (valid status values). It collects errors and warnings separately, returning True only if no errors exist.",
+      "keywords": ["validate_invoice", "basic_fields", "items", "amounts", "dates", "status", "errors", "warnings"],
+      "weight": 1.0
+    }
+  ]
+}

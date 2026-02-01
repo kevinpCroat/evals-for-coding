@@ -1,0 +1,17 @@
+The code in this directory has race conditions that cause intermittent test failures. Fix all concurrency bugs to make the code thread-safe. Tests must pass 100 consecutive runs.
+
+---
+
+Fix the race conditions in cache.py, counter.py, and worker_pool.py. The tests are failing intermittently due to concurrency issues.
+
+---
+
+Make this code thread-safe. Use proper synchronization primitives to eliminate all race conditions. All tests must pass consistently.
+
+---
+
+The test suite passes sometimes but fails randomly. This is caused by race conditions in the concurrent code. Fix all the bugs so tests pass reliably.
+
+---
+
+Add proper thread synchronization to fix race conditions. Tests should pass 100 times in a row without any failures.

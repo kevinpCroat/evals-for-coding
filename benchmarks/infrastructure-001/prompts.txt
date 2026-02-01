@@ -1,0 +1,97 @@
+=== TASK ===
+Create Terraform Infrastructure as Code to deploy a Task Management API to AWS.
+
+You have been provided with a working Flask application that needs to be deployed to AWS using containerized infrastructure. Your job is to write production-quality Terraform code that provisions all necessary AWS resources.
+
+The application is ready to deploy - you focus solely on creating the infrastructure code.
+
+=== CONTEXT ===
+A complete Task Management API application has been provided in the `starter-code/` directory. This is a Flask REST API that requires:
+- Container orchestration (ECS Fargate)
+- PostgreSQL database (RDS)
+- Object storage (S3)
+- Load balancing (ALB)
+- Proper networking (VPC, subnets, security groups)
+- Secrets management
+- Logging and monitoring
+
+All infrastructure requirements are detailed in `app_requirements.md`. The application code does NOT need any modifications.
+
+Files:
+- `app_requirements.md` - Detailed infrastructure requirements and specifications
+- `starter-code/app.py` - Flask application (DO NOT MODIFY)
+- `starter-code/Dockerfile` - Container definition (DO NOT MODIFY)
+- `starter-code/requirements.txt` - Python dependencies (DO NOT MODIFY)
+
+=== DELIVERABLES ===
+Create a `terraform/` directory containing:
+
+1. **Terraform Configuration Files**
+   - Provider configuration (AWS provider, us-east-1 region)
+   - All required resource definitions
+   - Variable declarations and values
+   - Output definitions
+   - Organized into logical files (e.g., main.tf, variables.tf, outputs.tf)
+
+2. **Required AWS Resources** (minimum):
+   - VPC with public/private subnets across 2 AZs
+   - Internet Gateway and NAT Gateway
+   - Route tables
+   - Application Load Balancer (internet-facing)
+   - ECS Fargate cluster and service
+   - ECS task definition
+   - RDS PostgreSQL database (multi-AZ)
+   - S3 bucket (with encryption and versioning)
+   - Security groups (ALB, ECS, RDS)
+   - IAM roles and policies
+   - Secrets Manager secret for database password
+   - CloudWatch log groups and alarms
+
+3. **terraform/README.md**
+   - Instructions for initializing, validating, and planning
+   - Architecture overview
+   - Variable descriptions
+   - Output descriptions
+
+=== CONSTRAINTS ===
+- Use Terraform 1.5+ compatible syntax
+- AWS provider only, us-east-1 region
+- NO hardcoded secrets or passwords (use Secrets Manager)
+- Security groups must follow principle of least privilege
+- All resources must be tagged consistently
+- Code must pass `terraform validate`
+- Code must successfully run `terraform plan`
+- Code must be idempotent (second plan shows 0 changes)
+- DO NOT run `terraform apply` - validation and planning only
+- Use placeholder ECR image ARN (e.g., "123456789012.dkr.ecr.us-east-1.amazonaws.com/task-api:latest")
+
+=== QUALITY REQUIREMENTS ===
+- Clean, well-formatted Terraform code
+- Descriptive resource names and variable names
+- Comments where helpful for complex logic
+- Proper resource dependencies
+- No overly permissive IAM policies (avoid wildcards where possible)
+- Follow Terraform best practices
+- Production-quality code as if for a real deployment
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+
+The verification will test:
+1. IaC Validation (30%) - terraform validate passes
+2. Plan Success (40%) - terraform plan runs without errors
+3. Idempotency (15%) - second plan shows 0 changes
+4. Security (15%) - no hardcoded secrets, proper security groups, least privilege IAM
+
+Your final score must be 70% or higher to pass.
+
+=== HINTS ===
+- Start with the basics: provider, VPC, subnets
+- Add compute layer: ECS cluster, task definition, service
+- Add data layer: RDS database with Secrets Manager
+- Add networking: ALB, target groups, listeners
+- Add security: security groups, IAM roles
+- Add monitoring: CloudWatch logs and alarms
+- Test frequently with `terraform validate` and `terraform plan`
+- Read app_requirements.md carefully for all specifications
+- Focus on getting a clean `terraform plan` output with all resources defined

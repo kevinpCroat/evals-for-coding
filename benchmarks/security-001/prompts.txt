@@ -1,0 +1,67 @@
+=== TASK ===
+Perform a comprehensive security audit of the Flask e-commerce application and fix all security vulnerabilities.
+
+You must:
+1. Identify ALL security vulnerabilities in the codebase
+2. Document each vulnerability with type, location, severity, and exploitation scenario
+3. Fix all vulnerabilities following OWASP best practices
+4. Run SAST tools (bandit) before and after fixes to measure improvement
+5. Ensure application functionality remains intact
+
+=== CONTEXT ===
+The application is located in starter-code/app.py. It's a Flask-based e-commerce platform with:
+- User authentication and authorization
+- Product catalog with search
+- Admin panel
+- File upload/download functionality
+- Database operations
+- Data import/export features
+
+The application was developed quickly and contains multiple OWASP Top 10 vulnerabilities including:
+- SQL Injection
+- Cross-Site Scripting (XSS)
+- Hardcoded credentials
+- Insecure deserialization
+- Path traversal
+- Command injection
+- Broken authentication
+- Other security issues
+
+Note: Some code is correctly implemented. Do not flag or modify secure implementations.
+
+=== DELIVERABLES ===
+1. SECURITY_AUDIT.md - Complete documentation of all vulnerabilities:
+   - Vulnerability type and location
+   - Severity level (Critical/High/Medium/Low)
+   - Description of the risk
+   - Exploitation scenario
+   - Fix applied
+
+2. Fixed app.py - Remediated version with all vulnerabilities fixed
+
+3. SAST analysis - Run bandit before and after:
+   ```bash
+   pip install bandit
+   bandit -r starter-code/ -f json -o bandit_before.json
+   # After fixes
+   bandit -r starter-code/ -f json -o bandit_after.json
+   ```
+
+4. Security tests (optional but recommended) - Test cases validating fixes
+
+=== CONSTRAINTS ===
+- Must maintain Python 3.8+ compatibility
+- Must use Flask framework
+- Must preserve all existing API endpoints
+- Must not break legitimate functionality
+- Use industry-standard security libraries (bcrypt, parameterized queries, etc.)
+- Follow OWASP security guidelines
+- Do not modify correctly implemented security features
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+
+Scoring:
+- 50% - Vulnerability detection rate (vulnerabilities found / total vulnerabilities)
+- 30% - SAST score improvement (bandit score before vs after)
+- 20% - Security test quality and coverage

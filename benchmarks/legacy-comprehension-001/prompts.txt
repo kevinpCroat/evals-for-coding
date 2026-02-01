@@ -1,0 +1,45 @@
+=== TASK ===
+Analyze the legacy invoice processing codebase in starter-code/ and answer all questions in questions.json. Create an answers.json file with your responses.
+
+=== CONTEXT ===
+You have inherited a legacy Python invoice processing system with no documentation. The codebase consists of 6 modules (~450 lines total):
+- invoice.py - Core invoice and item models with status workflow
+- tax_calculator.py - Tax calculation with regional support
+- payment_processor.py - Payment gateway and processing logic
+- database.py - Data persistence for invoices and customers
+- workflow.py - Business process orchestration
+- validators.py - Validation logic
+
+The questions.json file contains 20 questions covering:
+- Architecture (main components, design patterns)
+- Dependencies (which modules depend on what)
+- Data flow (how data moves through the system)
+- Change impact (what breaks if I change X)
+- Business logic (how features work)
+
+=== DELIVERABLES ===
+Create answers.json in this format:
+{
+  "answers": [
+    {"id": 1, "answer": "Your detailed answer..."},
+    {"id": 2, "answer": "Your detailed answer..."},
+    ...
+  ]
+}
+
+Each answer should:
+- Be technically accurate based on the actual code
+- Include specific class/method/constant names
+- Explain dependencies and data flows
+- Identify all components affected by changes
+
+=== CONSTRAINTS ===
+- Answer all 20 questions
+- Base answers on actual code analysis, not assumptions
+- Be specific - reference actual names from the code
+- Consider both direct and indirect dependencies
+- Trace data flows end-to-end
+- For impact analysis, identify ALL affected components
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.

@@ -1,0 +1,46 @@
+=== TASK ===
+Port the Python text analysis library in starter-code/ to JavaScript/TypeScript.
+
+You must translate both the main module (text_analyzer.py) and the complete test suite (test_text_analyzer.py) to JavaScript, ensuring all tests pass and the code uses idiomatic JavaScript patterns.
+
+=== CONTEXT ===
+The starter-code/ directory contains:
+- text_analyzer.py: A ~180 line Python module with text processing functions
+- test_text_analyzer.py: Comprehensive test suite with 50+ test cases
+- README.md: Documentation about the Python implementation
+
+The Python code uses features like list comprehensions, defaultdict, Counter, type hints, and set operations. You need to translate these to idiomatic JavaScript equivalents.
+
+=== DELIVERABLES ===
+Create the following files in the submission/ directory:
+
+1. textAnalyzer.js (or textAnalyzer.ts) - The ported implementation
+2. textAnalyzer.test.js (or textAnalyzer.test.ts) - The ported test suite
+3. package.json - NPM configuration with Jest and other dependencies
+4. README.md - Instructions for running tests
+
+Optional but recommended:
+- .eslintrc.json - ESLint configuration
+- tsconfig.json - TypeScript configuration (if using TypeScript)
+
+=== CONSTRAINTS ===
+- Use JavaScript (ES6+) or TypeScript (TypeScript preferred)
+- Use Jest for testing
+- All function/variable names must use camelCase (not snake_case)
+- Must use idiomatic JavaScript patterns:
+  - map/filter/reduce instead of list comprehensions
+  - Map or objects for dictionaries
+  - Set for unique collections
+  - Modern ES6+ features (arrow functions, spread operator, etc.)
+- No external text processing libraries
+- All 50+ tests must pass
+- Code must run in Node.js (v16+)
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+
+Your score is based on:
+- Tests passing (50%)
+- Idiomatic JavaScript code (20%)
+- Complete feature parity (20%)
+- Successful build/execution (10%)

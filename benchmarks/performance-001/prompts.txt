@@ -1,0 +1,49 @@
+=== TASK ===
+Optimize the slow log processing code to achieve at least 10x performance improvement.
+
+The LogProcessor in `starter-code/data_processor.py` is functionally correct but extremely slow. Your job is to:
+1. Analyze the profiler output in `profiler_output.txt`
+2. Identify performance bottlenecks
+3. Optimize the code to run at least 10x faster
+4. Ensure all tests still pass (behavior must be preserved)
+
+=== CONTEXT ===
+You have been provided with a log processing system that finds duplicate user sessions and computes session statistics. The implementation works correctly but has severe performance issues:
+
+- Baseline performance: ~15 seconds for 5,000 log entries
+- Target performance: <1.5 seconds (10x speedup)
+
+Files:
+- `starter-code/data_processor.py` - The slow implementation (optimize this)
+- `starter-code/test_data_processor.py` - Test suite (must continue to pass)
+- `starter-code/profiler_output.txt` - cProfile output showing bottlenecks
+- `starter-code/benchmark.py` - Script to measure performance
+
+The profiler reveals:
+- 25 million regex operations (excessive re-parsing)
+- O(n²) nested loops in find_duplicate_sessions
+- Bubble sort in get_top_users
+- Repeated parsing of the same data
+
+=== DELIVERABLES ===
+An optimized version of `starter-code/data_processor.py` that:
+
+1. Achieves 10x+ performance improvement (baseline ~15s → <1.5s)
+2. Passes all tests in test_data_processor.py with identical results
+3. Uses better algorithms and data structures based on profiler insights:
+   - Parse logs once and cache results
+   - Use dictionaries for O(1) lookups instead of O(n) searches
+   - Use O(n log n) sorting instead of O(n²) bubble sort
+   - Eliminate redundant work
+
+The API (class and method signatures) must remain the same.
+
+=== CONSTRAINTS ===
+- All tests must pass - do not break functionality
+- Maintain the same API (LogProcessor class with same methods)
+- Results must be identical to the original implementation
+- Focus on algorithmic improvements (not micro-optimizations)
+- Use the profiler data to guide optimization decisions
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
