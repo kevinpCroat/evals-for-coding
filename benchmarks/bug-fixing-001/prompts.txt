@@ -1,0 +1,27 @@
+=== TASK ===
+Fix a bug in the daterange utility library that is causing one test to fail.
+
+=== CONTEXT ===
+The codebase is a Python library located in the `src/` directory. The test suite is in the `tests/` directory.
+
+Currently, when you run the tests with `python3 -m pytest tests/`, one test fails:
+- `test_business_days_one_week_span` - This test is failing due to a bug in the `get_business_days()` function
+
+The bug is an off-by-one error in the loop condition. The function should count business days inclusively (including both start_date and end_date), but it's currently excluding the end_date.
+
+All other tests are passing and should continue to pass after your fix.
+
+=== DELIVERABLES ===
+1. Identify the bug in `src/daterange.py`
+2. Fix the bug with a minimal change
+3. Ensure all tests pass
+
+=== CONSTRAINTS ===
+- Do not modify any test files
+- Do not change function signatures or the public API
+- Only fix the bug - do not refactor or add new features
+- Use only Python standard library
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+You can also run tests directly with: `python -m pytest tests/ -v`

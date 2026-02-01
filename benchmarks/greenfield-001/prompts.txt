@@ -1,0 +1,38 @@
+=== TASK ===
+Build a complete URL shortener REST API from scratch in Python. This is a greenfield project - you're starting with an empty directory.
+
+=== CONTEXT ===
+Read the full specification in spec.md for detailed requirements.
+
+You need to create a production-ready URL shortening service (like bit.ly) with the following features:
+- Create shortened URLs from long URLs
+- Redirect short codes to original URLs
+- Track access statistics (view count)
+- List all URLs in the system
+- Delete URLs
+
+The API should be RESTful, handle all edge cases gracefully, and include comprehensive tests.
+
+=== DELIVERABLES ===
+1. Working REST API implementation in Python (Flask or FastAPI)
+2. Comprehensive test suite with >80% coverage
+3. README.md with setup instructions and API documentation
+4. requirements.txt with all dependencies
+5. All source code files needed to run the service
+
+=== CONSTRAINTS ===
+- Use Python with Flask or FastAPI
+- Store data in-memory (no database needed)
+- Short codes must be 6-8 characters, alphanumeric
+- Server must run on port 8080
+- Validate URLs properly
+- Return appropriate HTTP status codes
+- Handle all edge cases (invalid URLs, duplicates, missing data, etc.)
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+The verification will test:
+- All functional requirements work correctly
+- Tests pass with good coverage
+- Code quality metrics (complexity, duplication)
+- Documentation completeness

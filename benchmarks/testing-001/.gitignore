@@ -1,0 +1,27 @@
+# Test file (AI should create this)
+test_shopping_cart.py
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Testing
+.pytest_cache/
+.coverage
+coverage.json
+htmlcov/
+.mutmut-cache/
+*.bak
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

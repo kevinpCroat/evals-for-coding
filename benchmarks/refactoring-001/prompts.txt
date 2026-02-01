@@ -1,0 +1,71 @@
+=== TASK ===
+Refactor the order processing system in `starter-code/order_processor.py` to improve code quality while maintaining 100% behavioral compatibility with the existing tests.
+
+=== CONTEXT ===
+The `starter-code/` directory contains:
+- `order_processor.py`: A working but messy order processing system with multiple code smells
+- `test_order_processor.py`: Comprehensive test suite with 60+ tests
+
+The code works correctly but suffers from:
+- God class doing too much
+- Methods over 100 lines long
+- Duplicated code in multiple places
+- Poor variable naming
+- High cyclomatic complexity
+- Mixed responsibilities
+
+Your goal is to improve the code structure WITHOUT breaking any tests.
+
+=== DELIVERABLES ===
+1. Refactored `order_processor.py` with:
+   - Reduced complexity (break down long methods, extract classes)
+   - Eliminated code duplication (DRY principle)
+   - Better naming (clear, descriptive names)
+   - Improved separation of concerns
+
+2. All tests must still pass - copy the test file and run: `pytest test_order_processor.py -v`
+
+3. The refactored code should maintain the exact same public API as the original
+
+=== CONSTRAINTS ===
+- CRITICAL: All tests must pass after refactoring (if any fail, you get 0 points)
+- DO NOT modify the test file
+- Maintain the same public interface (class names, method signatures)
+- Keep the same file structure
+- Use Python best practices (PEP 8)
+
+=== REFACTORING OPPORTUNITIES ===
+Focus on these code smells:
+
+1. Extract classes from the god class:
+   - Inventory management
+   - Order processing logic
+   - Customer management
+   - Pricing/discount calculations
+
+2. Extract methods to reduce complexity:
+   - Break down the 100+ line `processOrderAndCalculateEverything` method
+   - Extract validation logic
+   - Extract calculation logic
+
+3. Eliminate duplication:
+   - Order/customer/product lookup logic repeated multiple times
+   - Validation patterns duplicated
+   - Iteration and formatting patterns duplicated
+
+4. Improve naming:
+   - Replace unclear variable names (p, n, pr, s)
+   - Use consistent conventions
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+
+The script will:
+1. Run all tests (must pass or score = 0)
+2. Measure cyclomatic complexity reduction (30% of score)
+3. Measure code duplication reduction (20% of score)
+
+Your score is based on:
+- Tests passing: 50% (all-or-nothing)
+- Complexity reduction: 30%
+- Duplication reduction: 20%

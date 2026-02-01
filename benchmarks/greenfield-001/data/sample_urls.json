@@ -1,0 +1,22 @@
+[
+  {
+    "url": "https://www.example.com/very/long/url/path/with/many/segments/that/should/be/shortened",
+    "description": "Example of a long URL that would benefit from shortening"
+  },
+  {
+    "url": "https://github.com/anthropics/anthropic-sdk-python",
+    "description": "GitHub repository URL"
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/URL_shortening",
+    "description": "Wikipedia article about URL shortening"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "description": "Video URL with query parameters"
+  },
+  {
+    "url": "https://docs.python.org/3/library/urllib.parse.html#urllib.parse.urlparse",
+    "description": "URL with anchor/fragment"
+  }
+]

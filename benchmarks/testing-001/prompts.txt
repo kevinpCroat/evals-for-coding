@@ -1,0 +1,52 @@
+=== TASK ===
+Write a comprehensive test suite for the shopping_cart.py module. The module currently has NO tests, and you need to create them from scratch.
+
+Your goal is to write high-quality tests that:
+1. Achieve high code coverage (>90%)
+2. Actually catch bugs (high mutation score >80%)
+3. Are independent and can run in any order
+4. Have meaningful assertions that validate behavior
+
+=== CONTEXT ===
+The shopping_cart.py module contains an e-commerce shopping cart implementation with:
+- Item class for products (with price, quantity validation)
+- ShoppingCart class for cart operations
+- Discount and tax calculation logic
+- Loyalty points functionality
+- Multiple custom exceptions for error handling
+
+The code has various edge cases you need to test:
+- Empty carts
+- Negative values and boundary conditions
+- Multiple discounts
+- Decimal precision in price calculations
+- Type validation
+- Exception handling
+
+=== DELIVERABLES ===
+Create a file named test_shopping_cart.py that contains:
+1. Tests for the Item class (initialization, validation, total calculation)
+2. Tests for the ShoppingCart class (all public methods)
+3. Edge case tests (empty cart, boundaries, errors)
+4. Tests for discount and tax calculations
+5. Tests for loyalty points
+6. Exception handling tests
+
+Use pytest as your testing framework. Organize tests logically using test classes or functions.
+
+=== CONSTRAINTS ===
+- Use pytest framework
+- Tests must be independent (no shared state)
+- Use descriptive test names
+- Include meaningful assertions
+- Use pytest features like fixtures and parametrize where appropriate
+- Do not modify shopping_cart.py - only create test_shopping_cart.py
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+
+Your tests will be evaluated on:
+- Coverage: 30% weight
+- Mutation score (ability to catch bugs): 40% weight
+- Test independence: 15% weight
+- Assertion quality: 15% weight

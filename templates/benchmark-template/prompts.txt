@@ -1,0 +1,14 @@
+=== TASK ===
+[Describe the task the AI must complete]
+
+=== CONTEXT ===
+[Provide any necessary background information, file locations, or setup details]
+
+=== DELIVERABLES ===
+[List exactly what the AI should produce]
+
+=== CONSTRAINTS ===
+[Any limitations or requirements to follow]
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.

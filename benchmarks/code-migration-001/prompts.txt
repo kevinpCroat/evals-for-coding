@@ -1,0 +1,34 @@
+=== TASK ===
+Migrate the SQLAlchemy codebase in starter-code/ from version 1.4 to version 2.0.
+
+The code currently uses deprecated SQLAlchemy 1.4 APIs that need to be updated to work with SQLAlchemy 2.0. You must update the code to use modern SQLAlchemy 2.0 patterns while ensuring all existing tests continue to pass.
+
+=== CONTEXT ===
+The starter-code/ directory contains:
+- models.py: Database models using deprecated declarative_base and Column definitions
+- database.py: Repository classes using deprecated session.query() API
+- test_database.py: Comprehensive test suite (DO NOT MODIFY)
+- requirements.txt: Dependencies with old SQLAlchemy 1.4.48
+
+Key deprecated patterns to migrate:
+1. session.query() → select() with session.scalars()/session.execute()
+2. declarative_base from sqlalchemy.ext.declarative → from sqlalchemy.orm
+3. Consider using mapped_column() for more modern column definitions
+
+=== DELIVERABLES ===
+1. Updated requirements.txt with SQLAlchemy 2.0.x
+2. Updated models.py with SQLAlchemy 2.0 compatible model definitions
+3. Updated database.py with select() based queries instead of session.query()
+4. All tests in test_database.py must pass without modification
+5. No deprecation warnings when running pytest
+
+=== CONSTRAINTS ===
+- DO NOT modify test_database.py - tests must pass as-is
+- Update to SQLAlchemy 2.0.x (not 1.4.x)
+- All existing functionality must work identically
+- Code should follow SQLAlchemy 2.0 best practices
+- No deprecation warnings should appear
+
+=== VERIFICATION ===
+Run `./verification/verify.sh` to check your implementation.
+You can also run tests manually with: cd starter-code && pytest test_database.py -v
